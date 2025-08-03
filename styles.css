@@ -214,10 +214,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .trust-message {
     background: linear-gradient(135deg, var(--primary-color), #5c6bc0);
-    color: white;
+    color: white !important;
     padding: 1rem 1.5rem;
     border-radius: 15px;
     text-align: center;
+}
+
+.trust-message p {
+    color: white !important;
 }
 
 .stats-card {
@@ -304,6 +308,37 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.75rem;
     padding: 0.5rem 0.75rem;
     border-radius: 15px;
+}
+
+/* Privacy Policy Card */
+.privacy-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.privacy-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.privacy-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.privacy-content ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.privacy-content ul li:before {
+    content: '•';
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
 }
 
 /* Floating WhatsApp Button */
@@ -496,6 +531,11 @@ h1, h2, h3, h4, h5, h6 {
 /* Smooth Scrolling */
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
 }
 
 /* Section Spacing */
