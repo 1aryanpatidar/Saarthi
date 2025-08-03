@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        if (scrollTop > 100) {
-            navbar.classList.add('shadow');
+        if (scrollTop > 50) {
+            navbar.classList.add('scrolled');
         } else {
-            navbar.classList.remove('shadow');
+            navbar.classList.remove('scrolled');
         }
         
         lastScrollTop = scrollTop;
@@ -262,6 +262,37 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // Fix mobile scroll issues
+    let isScrolling = false;
+    let scrollTimeout;
+    
+    window.addEventListener('scroll', function() {
+        if (!isScrolling) {
+            isScrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+            }, 100);
+        }
+    });
+    
+    // Prevent horizontal scroll on mobile
+    document.addEventListener('touchmove', function(e) {
+        if (e.target.closest('.floating-whatsapp')) {
+            return;
+        }
+        
+        const touch = e.touches[0];
+        const element = e.target;
+        const rect = element.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        
+        if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+            e.preventDefault();
+        }
+    }, { passive: false });
     
     // Add touch support for mobile
     let touchStartY = 0;
