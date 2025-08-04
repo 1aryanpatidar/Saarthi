@@ -3,10 +3,8 @@
 /* CSS Variables for consistent colors */
 :root {
     --primary-color: #3F51B5; /* Indigo */
-    --primary-light: #eef2ff; /* Light Indigo for backgrounds */
     --accent-color: #FFC107;  /* Amber */
-    --background-color: #f8f9fa; /* Light Gray */
-    --white-color: #ffffff;
+    --background-color: #F9F9F9;
     --text-primary: #212121;
     --text-secondary: #616161;
     --success-color: #4CAF50;
@@ -16,17 +14,15 @@
     --dark-yellow-text: #b45309;
 }
 
-/* Base and Typography - SCROLLING FIX HERE */
-html, body {
-    height: auto; /* Allow the body to grow with content */
-    width: 100%;
-    overflow-x: hidden; /* Prevent horizontal scroll, allow vertical */
+/* Base and Typography */
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Open Sans', sans-serif;
     color: var(--text-primary);
-    background-color: var(--white-color); /* Default background is white */
+    background-color: var(--background-color);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -35,11 +31,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-}
-
-/* Section Styling */
-.bg-light {
-    background-color: var(--background-color) !important;
 }
 
 /* Navbar */
@@ -58,10 +49,12 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
     font-weight: 700;
 }
+
 .nav-link {
     font-weight: 500;
     transition: color 0.3s ease;
 }
+
 .nav-link:hover {
     color: var(--primary-color) !important;
 }
@@ -69,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Hero Section */
 .hero-section {
     padding-top: 80px;
-    background-color: var(--background-color);
+    background-color: #f8f9fa;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -118,43 +111,50 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border-radius: 25px;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    background: var(--white-color);
+    background: #ffffff;
 }
+
 .product-card:hover {
     transform: translateY(-12px);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12) !important;
     border-color: var(--primary-color);
 }
+
 .product-image {
     transition: transform 0.4s ease;
     border-radius: 15px;
 }
+
 .product-card:hover .product-image {
     transform: scale(1.05);
 }
+
 .product-badge .badge {
     font-size: 0.75rem;
     padding: 0.5rem 0.75rem;
     border-radius: 20px;
 }
+
 .product-features ul li {
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
 }
+
 .product-price {
     border-top: 1px solid #e9ecef;
     padding-top: 1rem;
 }
+
 .recommendation-text {
     background-color: var(--light-yellow-bg);
     color: var(--dark-yellow-text);
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 8px;
-    font-size: 0.9rem; /* Increased font size */
-    font-weight: 600; /* Made it bolder */
+    font-size: 0.85rem;
+    font-weight: 500;
     text-align: center;
     margin-bottom: 1rem;
-    border: 1px solid #ffe58f;
+    border: 1px solid var(--accent-color);
 }
 
 /* How It Works */
@@ -168,4 +168,27 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     color: white;
     font-size: 2rem;
-    box-shadow: 0 5px 15px rgba(63, 81, 181, 0.3
+    box-shadow: 0 5px 15px rgba(63, 81, 181, 0.3);
+    position: relative;
+}
+
+.step-number {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--accent-color);
+    color: var(--text-primary);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* About Section */
+.about-features .feature-item {
+    display: flex;
+    align-

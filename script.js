@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
     
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.product-card, .step-icon, .contact-card, .about-content, .stats-card, .vision-card');
+    const animateElements = document.querySelectorAll('.product-card, .step-icon, .contact-card, .about-content, .stats-card');
     animateElements.forEach(el => {
         el.classList.add('animate-on-scroll');
         observer.observe(el);
@@ -80,14 +80,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- Add loading state to interactive buttons ---
+    // --- Add loading state to WhatsApp buttons ---
     const buttons = document.querySelectorAll('a.btn');
     buttons.forEach(button => {
         button.addEventListener('click', function() {
-            if (this.href && (this.href.includes('wa.me') || this.href.includes('tel:'))) {
+            if (this.href && this.href.includes('wa.me')) {
                 const originalText = this.innerHTML;
                 this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Opening...';
-                // Revert button text after a delay
+                // Revert button text after a delay, as we can't know when WhatsApp opens
                 setTimeout(() => {
                     this.innerHTML = originalText;
                 }, 2500);
@@ -95,5 +95,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    console.log('Saarthi website v4 (Enhanced) loaded successfully! 🎓');
+    console.log('Saarthi website v3 (Final) loaded successfully! 🎓');
 });
