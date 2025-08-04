@@ -621,22 +621,38 @@ h1, h2, h3, h4, h5, h6 {
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    position: relative;
 }
 
 /* Fix mobile scroll jumping */
 @media (max-width: 768px) {
     html {
         scroll-behavior: auto;
+        overflow-x: hidden;
+        height: 100%;
+    }
+    
+    body {
+        overflow-x: hidden;
+        height: 100%;
+        position: relative;
     }
     
     .hero-section {
         min-height: 100vh;
         height: auto;
+        overflow: hidden;
+    }
+    
+    /* Prevent viewport issues on mobile */
+    .container {
+        overflow-x: hidden;
     }
 }
 

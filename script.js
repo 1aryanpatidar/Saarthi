@@ -266,16 +266,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fix mobile scroll issues
     let isScrolling = false;
     let scrollTimeout;
+    let lastScrollY = 0;
     
+    // Prevent scroll jumping on mobile
     window.addEventListener('scroll', function() {
+        const currentScrollY = window.pageYOffset;
+        
         if (!isScrolling) {
             isScrolling = true;
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
-            }, 100);
+            }, 150);
         }
-    });
+        
+        // Prevent scroll jumping
+        if (Math.abs(currentScrollY - lastScrollY) > 100) {
+            window.scrollTo(0, lastScrollY);
+        }
+        
+        lastScrollY = currentScrollY;
+    }, { passive: true });
     
     // Prevent horizontal scroll on mobile
     document.addEventListener('touchmove', function(e) {
@@ -283,16 +294,34 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        const touch = e.touches[0];
-        const element = e.target;
-        const rect = element.getBoundingClientRect();
-        const x = touch.clientX - rect.left;
-        const y = touch.clientY - rect.top;
-        
-        if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
-            e.preventDefault();
+        // Prevent horizontal scrolling
+        if (e.touches.length === 1) {
+            const touch = e.touches[0];
+            const startX = touch.clientX;
+            const startY = touch.clientY;
+            
+            // Allow vertical scrolling, prevent horizontal
+            if (Math.abs(touch.clientX - startX) > Math.abs(touch.clientY - startY)) {
+                e.preventDefault();
+            }
         }
     }, { passive: false });
+    
+    // Fix viewport issues on mobile
+    if (window.innerWidth <= 768) {
+        document.documentElement.style.overflowX = 'hidden';
+        document.body.style.overflowX = 'hidden';
+        
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    }
     
     // Add touch support for mobile
     let touchStartY = 0;
